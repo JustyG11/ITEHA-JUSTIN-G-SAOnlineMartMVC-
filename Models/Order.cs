@@ -5,13 +5,13 @@ namespace SAOnlineMartMVC.Models
 {
     public class Order
     {
-        public int Id { get; set; } // Primary key, typically an integer
+        public int Id { get; set; } 
 
         [Required(ErrorMessage = "Order ID is required")]
-        public string OrderId { get; set; } = Guid.NewGuid().ToString(); // Unique identifier as a string
+        public string OrderId { get; set; } = Guid.NewGuid().ToString(); 
 
         [Required(ErrorMessage = "Order date is required")]
-        public DateTime OrderDate { get; set; } = DateTime.Now; // Default to current date and time
+        public DateTime OrderDate { get; set; } = DateTime.Now; 
 
         [Required(ErrorMessage = "Customer name is required")]
         public string CustomerName { get; set; }
@@ -34,7 +34,7 @@ namespace SAOnlineMartMVC.Models
         [Range(0.01, double.MaxValue, ErrorMessage = "Total amount must be greater than zero")]
         public decimal TotalAmount { get; set; } // Total amount for the order
 
-        // Optional: Include a UserId if tracking users
-        public string UserId { get; set; } // User ID (string type if using GUIDs or similar)
+        
+        public string UserId { get; set; }
     }
 }

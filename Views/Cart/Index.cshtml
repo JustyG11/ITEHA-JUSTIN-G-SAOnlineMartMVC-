@@ -22,7 +22,7 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@item.Product.Name</td> <!-- Ensure this is binding correctly -->
+                    <td>@item.Product.Name</td> 
                     <td>@item.Quantity</td>
                     <td>@String.Format(new System.Globalization.CultureInfo("en-ZA"), "{0:C}", item.Product.Price)</td> <!-- Correct currency format -->
                     <td>@String.Format(new System.Globalization.CultureInfo("en-ZA"), "{0:C}", item.Product.Price * item.Quantity)</td> <!-- Calculated total -->

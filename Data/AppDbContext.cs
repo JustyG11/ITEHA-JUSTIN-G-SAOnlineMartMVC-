@@ -18,9 +18,9 @@ namespace SAOnlineMartMVC.Data
             modelBuilder.Entity<Order>()
                 .Property(o => o.OrderId)
                 .IsRequired()
-                .HasMaxLength(50); // Set the max length if needed
+                .HasMaxLength(50);
 
-            // Add further configurations as required by your business logic
+
         }
     }
 }

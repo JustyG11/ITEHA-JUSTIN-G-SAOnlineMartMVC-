@@ -7,8 +7,8 @@ namespace SAOnlineMartMVC.Controllers
 {
     public class CheckoutController : Controller
     {
-        // This would typically be handled via a database or session in a real application
-        private static List<CartItem> cart = new List<CartItem>(); // Mocked cart data for demonstration
+
+        private static List<CartItem> cart = new List<CartItem>();
 
         // GET: /Checkout
         // Displays the checkout form
