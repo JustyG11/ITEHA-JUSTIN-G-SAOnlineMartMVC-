@@ -1,0 +1,75 @@
+﻿@model SAOnlineMartMVC.Models.Order
+
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<h1>Checkout</h1>
+
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <div class="alert alert-info">@ViewBag.Message</div>
+}
+
+<h2>Your Cart</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.Cart as List<SAOnlineMartMVC.Models.CartItem>)
+        {
+            <tr>
+                <td>@item.Product.Name</td>
+                <td>@item.Quantity</td>
+                <td>@String.Format(new System.Globalization.CultureInfo("en-ZA"), "{0:C}", item.Product.Price)</td>
+                <td>@String.Format(new System.Globalization.CultureInfo("en-ZA"), "{0:C}", item.Product.Price * item.Quantity)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<form asp-action="Complete" method="post">
+    <div class="form-group">
+        <label asp-for="CustomerName"></label>
+        <input asp-for="CustomerName" class="form-control" />
+        <span asp-validation-for="CustomerName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Address"></label>
+        <input asp-for="Address" class="form-control" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PhoneNumber"></label>
+        <input asp-for="PhoneNumber" class="form-control" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PaymentMethod"></label>
+        <select asp-for="PaymentMethod" class="form-control">
+            <option>Credit Card</option>
+            <option>Debit Card</option>
+            <option>PayPal</option>
+        </select>
+        <span asp-validation-for="PaymentMethod" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Complete Purchase</button>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

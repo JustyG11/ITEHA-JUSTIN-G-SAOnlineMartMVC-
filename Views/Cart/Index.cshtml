@@ -1,0 +1,44 @@
+﻿@model IEnumerable<SAOnlineMartMVC.Models.CartItem>
+
+@{
+    ViewData["Title"] = "Your Cart";
+}
+
+<h1>Your Shopping Cart</h1>
+
+@if (Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Product.Name</td> <!-- Ensure this is binding correctly -->
+                    <td>@item.Quantity</td>
+                    <td>@String.Format(new System.Globalization.CultureInfo("en-ZA"), "{0:C}", item.Product.Price)</td> <!-- Correct currency format -->
+                    <td>@String.Format(new System.Globalization.CultureInfo("en-ZA"), "{0:C}", item.Product.Price * item.Quantity)</td> <!-- Calculated total -->
+                    <td>
+                        <form asp-action="Remove" method="post" style="display:inline">
+                            <input type="hidden" name="id" value="@item.Product.Id" />
+                            <button type="submit" class="btn btn-danger">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a href="@Url.Action("Index", "Checkout")" class="btn btn-success">Proceed to Checkout</a>
+}
+else
+{
+    <p>Your cart is empty.</p>
+}

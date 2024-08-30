@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<h1>Welcome to SA Online Mart</h1>
+<p>Explore our wide range of products!</p>
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="home-container">
+    <h1>Welcome to SA Online Mart</h1>
+
+    <p class="description">
+        SA Online Mart aims to promote local South African products by providing a seamless online shopping experience for customers nationwide.
+        SA Online Mart will feature a diverse range of products, from handcrafted jewelry, to locally-produced clothing. Browse through our range at your conveneice and pleasure.
+    </p>
+
+    <div class="cta-buttons">
+        <a href="@Url.Action("List", "Product")" class="btn btn-primary">Shop Now</a>
+        <a href="@Url.Action("Index", "Admin")" class="btn btn-secondary">Admin Dashboard</a>
+    </div>
+</div>
+
+
+<a href="@Url.Action("List", "Product")">View Products</a>

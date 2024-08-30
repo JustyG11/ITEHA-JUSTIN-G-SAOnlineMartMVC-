@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SAOnlineMartMVC</title>
+    <link rel="stylesheet" href="/css/site.css" asp-append-version="true" />
+
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/Product/List">Products</a></li>
+                <li><a href="/Cart/Index">Cart</a></li>
+                <li><a href="/Admin/Index">Admin</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main role="main" class="container">
+        @RenderBody()
+    </main>
+    <footer>
+        <p>&copy; 2024 - SAOnlineMart</p>
+    </footer>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

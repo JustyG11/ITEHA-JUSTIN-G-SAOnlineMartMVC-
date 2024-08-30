@@ -1,0 +1,20 @@
+﻿@model SAOnlineMartMVC.Models.Product
+
+@{
+    ViewData["Title"] = "Product Details";
+}
+
+<h1>@Model.Name</h1>
+
+<p>@Model.Description</p>
+<p>Price: @String.Format(new System.Globalization.CultureInfo("en-ZA"), "{0:C}", Model.Price)</p>
+<p>Stock: @Model.Stock</p>
+
+<form asp-action="Add" asp-controller="Cart">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <label for="quantity">Quantity:</label>
+    <input type="number" name="quantity" value="1" min="1" max="@Model.Stock" class="form-control" />
+    <button type="submit" class="btn btn-primary">Add to Cart</button>
+</form>
+
+<a href="@Url.Action("List", "Product")">Back to Products</a>

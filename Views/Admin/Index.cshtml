@@ -1,0 +1,36 @@
+﻿@model IEnumerable<SAOnlineMartMVC.Models.Product>
+
+@{
+    ViewData["Title"] = "Admin - Manage Products";
+}
+
+<h1>Manage Products</h1>
+
+<a href="@Url.Action("Create", "Admin")">Create New Product</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Description</td>
+                <td>@String.Format(new System.Globalization.CultureInfo("en-ZA"), "{0:C}", product.Price)</td>
+                <td>@product.Stock</td>
+                <td>
+                    <a href="@Url.Action("Edit", "Admin", new { id = product.Id })">Edit</a> |
+                    <a href="@Url.Action("Delete", "Admin", new { id = product.Id })">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
