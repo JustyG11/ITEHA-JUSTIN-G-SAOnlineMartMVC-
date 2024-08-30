@@ -47,8 +47,6 @@ In Visual Studio:
 Go to Tools > NuGet Package Manager > Manage NuGet Packages for Solution.
 Click Restore to download all necessary packages.
 In Visual Studio Code (or terminal):
-bash
-Copy code
 dotnet restore
 
 6. Set Up the Database
