@@ -4,33 +4,65 @@
     ViewData["Title"] = "Admin - Manage Products";
 }
 
-<h1>Manage Products</h1>
+<div class="container mt-5">
+    <h1 class="mb-4">Manage Products</h1>
 
-<a href="@Url.Action("Create", "Admin")">Create New Product</a>
+    <!-- Button to create a new product -->
+    <a href="@Url.Action("Create", "Admin")" class="btn btn-primary mb-3">Create New Product</a>
 
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Stock</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var product in Model)
-        {
+    <!-- Display success or error messages -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+    }
+
+    <!-- Products table -->
+    <table class="table table-striped">
+        <thead class="thead-dark">
             <tr>
-                <td>@product.Name</td>
-                <td>@product.Description</td>
-                <td>@String.Format(new System.Globalization.CultureInfo("en-ZA"), "{0:C}", product.Price)</td>
-                <td>@product.Stock</td>
-                <td>
-                    <a href="@Url.Action("Edit", "Admin", new { id = product.Id })">Edit</a> |
-                    <a href="@Url.Action("Delete", "Admin", new { id = product.Id })">Delete</a>
-                </td>
+                <th scope="col">#</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Price (ZAR)</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Actions</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @if (!Model.Any())
+            {
+                <tr>
+                    <td colspan="6" class="text-center">No products found.</td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var product in Model)
+                {
+                    <tr>
+                        <th scope="row">@product.Id</th>
+                        <td>@product.Name</td>
+                        <td>@product.Description</td>
+                        <td>@String.Format(new System.Globalization.CultureInfo("en-ZA"), "{0:C}", product.Price)</td>
+                        <td>@product.Stock</td>
+                        <td>
+                            <!-- Edit Button -->
+                            <a href="@Url.Action("Edit", "Admin", new { id = product.Id })" class="btn btn-warning btn-sm">Edit</a>
+
+                            <!-- Delete Button -->
+                            <form asp-action="Delete" method="post" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this product?');">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@product.Id" />
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
